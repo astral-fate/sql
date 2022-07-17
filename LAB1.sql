@@ -1,0 +1,1 @@
+SELECT * FROM aq$_internet_agent_privs
