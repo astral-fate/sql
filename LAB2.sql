@@ -1,4 +1,13 @@
 
+CREATE TABLE department (
+  dname CHAR(10) NOT NULL,
+  dnumber int NOT NULL PRIMARY KEY ,
+  mgr_ssn NUMBER(10) ,
+  mgr_start_date date NOT NULL
+);
+
+
+
 CREATE TABLE employee (
   fname CHAR(10)  NOT NULL,
   minit NUMBER(10)  NOT NULL,
@@ -7,68 +16,52 @@ CREATE TABLE employee (
   bdate date  NOT NULL ,
   address CHAR(10) NOT NULL ,
   sex CHAR(10)  NOT NULL,
-  super_ssn  NUMBER(10) NOT NULL,
-  dno NUMBER(10)  NOT NULL
+  dno int,
+  FOREIGN key  (dno) REFERENCES department (dnumber),
+  super_ssn  int,
+  FOREIGN key (super_ssn) REFERENCES employee (ssn)
+
 );
 
 
-
-CREATE TABLE department (
-  dname CHAR(10) NOT NULL,
-  dNUMBER int NOT NULL PRIMARY KEY ,
-  mgr_ssn NUMBER(10) ,
-  mgr_start_date date NOT NULL
-);
 
 
 CREATE TABLE dept_locations (
-  dnumber int NOT NULL PRIMARY KEY,
-  dlocation CHAR(10) NOT NULL
+  dlocation int NOT NULL PRIMARY KEY,
+  dnumber int,
+  FOREIGN key (dnumber) REFERENCES department(dnumber)
 );
 
 
-
-
-CREATE TABLE projects (
+CREATE TABLE project (
   pname CHAR(10),
-  pnumber INT NOT NULL  PRIMARY KEY ,
+  pnumber int not null primary key,
   plocation CHAR(10),
-  dnum CHAR(10) 
+  dnum int,
+  FOREIGN key  (dnum) REFERENCES department (dnumber) 
 );
-
-
 
 
 
 CREATE TABLE works_on (
+
+  hours CHAR(10),
   essn INT NOT NULL  PRIMARY KEY,
-  pno CHAR(10),
-  hours CHAR(10)
+  pno int,
+  FOREIGN key (pno) REFERENCES project (pnumber)
+  
 );
 
- 
+
 
 
 
 CREATE TABLE dependent (
-  essn INT not null  PRIMARY KEY,
-  dependent_name integer,
+  
+  dependent_name INT not null  PRIMARY KEY,
   sex CHAR(10),
   bdate date,
-  relationship CHAR(10)
+  relationship CHAR(10),
+  essn int,
+  FOREIGN key  (essn) REFERENCES employee (ssn)
 );
-
-
-ALTER TABLE `department` ADD FOREIGN KEY (`dnumber`) REFERENCES `employee` (`dno`);
-
-ALTER TABLE `employee` ADD FOREIGN KEY (`ssn`) REFERENCES `department` (`mgr_ssn`);
-
-ALTER TABLE `dept_locations` ADD FOREIGN KEY (`dnumber`) REFERENCES `department` (`dnumber`);
-
-ALTER TABLE `projects` ADD FOREIGN KEY (`dnum`) REFERENCES `department` (`dnumber`);
-
-ALTER TABLE `works_on` ADD FOREIGN KEY (`essn`) REFERENCES `employee` (`ssn`);
-
-ALTER TABLE `works_on` ADD FOREIGN KEY (`pno`) REFERENCES `projects` (`pnumber`);
-
-ALTER TABLE `dependent` ADD FOREIGN KEY (`essn`) REFERENCES `employee` (`ssn`);
