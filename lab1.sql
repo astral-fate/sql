@@ -2,6 +2,9 @@ CREATE TABLE Students (Student_id NUMBER(7), StudentName CHAR(20), StudentLevel 
 
 select * from Students;
 
+
+ALTER TABLE Students ADD(DateOfBirth NUMBER(10) );
+
 ALTER TABLE Students MODIFY(DateOfBirth DATE);
 
 ALTER TABLE  Students DROP COLUMN MaitalStatus;
