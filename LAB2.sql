@@ -1,47 +1,60 @@
+
 CREATE TABLE employee (
-  fname CHAR(10),
-  minit NUMBER(10),
-  lname CHAR(10),
-  ssn NUMBER(10),
-  bdate date,
-  address CHAR(10),
-  sex CHAR(10),
-  super_ssn NUMBER(10),
-  dno INT PRIMARY KEY
+  fname CHAR(10)  NOT NULL,
+  minit NUMBER(10)  NOT NULL,
+  lname CHAR(10)  NOT NULL,
+  ssn int not null primary key,
+  bdate date  NOT NULL ,
+  address CHAR(10) NOT NULL ,
+  sex CHAR(10)  NOT NULL,
+  super_ssn  NUMBER(10) NOT NULL,
+  dno NUMBER(10)  NOT NULL
 );
 
 
 
 CREATE TABLE department (
-  dname CHAR(10),
-  dNUMBER INT PRIMARY KEY,
-  mgr_ssn NUMBER(10),
-  mgr_start_date date
+  dname CHAR(10) NOT NULL,
+  dNUMBER int NOT NULL PRIMARY KEY ,
+  mgr_ssn NUMBER(10) ,
+  mgr_start_date date NOT NULL
 );
+
 
 CREATE TABLE dept_locations (
-  dNUMBER INT PRIMARY KEY,
-  dlocation CHAR(10)
+  dnumber int NOT NULL PRIMARY KEY,
+  dlocation CHAR(10) NOT NULL
 );
+
+
+
 
 CREATE TABLE projects (
-  pname NUMBER(10),
-  pNUMBER INT PRIMARY KEY,
+  pname CHAR(10),
+  pnumber INT NOT NULL  PRIMARY KEY ,
   plocation CHAR(10),
-  dnum INT PRIMARY KEY
+  dnum CHAR(10) 
 );
+
+
+
+
 
 CREATE TABLE works_on (
-  essn NUMBER(10),
-  pno INT PRIMARY KEY,
-  hours NUMBER(10)
+  essn INT NOT NULL  PRIMARY KEY,
+  pno CHAR(10),
+  hours CHAR(10)
 );
 
+ 
+
+
+
 CREATE TABLE dependent (
-  essn NUMBER(10),
-  dependent_name CHAR(10),
+  essn INT not null  PRIMARY KEY,
+  dependent_name integer,
   sex CHAR(10),
-  bdate DATE,
+  bdate date,
   relationship CHAR(10)
 );
 
